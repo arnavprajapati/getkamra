@@ -1,4 +1,5 @@
-import { Text, View, TextInput, TouchableOpacity, FlatList, SafeAreaView } from "react-native";
+import { FlatList, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import "../../global.css";
 
 const properties = [
   { id: '1', title: 'Modern Villa', city: 'Mumbai', price: '₹1.2Cr' },
@@ -8,36 +9,23 @@ const properties = [
 
 export default function Index() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff", padding: 20 }}>
-      <View style={{ paddingTop: 30 }}>
-        <Text style={{ fontSize: 16, fontWeight: "500", marginBottom: 4 }}>
+    <SafeAreaView className="flex-1 bg-white p-5">
+      <View className="py-10">
+        <Text className="text-base font-medium mb-1 text-black">
           Hello here Arnav
         </Text>
-        
+
         <TextInput
           placeholder="Search city.."
           placeholderTextColor="#999"
-          style={{
-            borderWidth: 1,
-            borderColor: "#ddd",
-            borderRadius: 8,
-            padding: 10,
-            marginTop: 12,
-          }}
+          className="border border-gray-300 rounded-lg p-2.5 mt-3 text-base bg-white text-black"
         />
 
         <TouchableOpacity
-          onPress={() => alert('Seraching')}
-          style={{
-            backgroundColor: "#2563EB",
-            borderRadius: 8,
-            padding: 12,
-            alignItems: "center",
-            marginTop: 12,
-            marginBottom: 8,
-          }}
+          onPress={() => alert('Searching')}
+          className="bg-blue-600 rounded-lg p-3 items-center mt-3 mb-2"
         >
-          <Text style={{ color: "#fff", fontWeight: "600", fontSize: 16 }}>Search</Text>
+          <Text className="text-white font-semibold text-base">Search</Text>
         </TouchableOpacity>
       </View>
 
@@ -46,10 +34,10 @@ export default function Index() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ padding: 16, paddingTop: 0 }}
         renderItem={({ item }) => (
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.title}</Text>
-            <Text style={{ color: "#666", fontSize: 14 }}>{item.city}</Text>
-            <Text style={{ color: "#2563EB", fontSize: 15, fontWeight: "500" }}>{item.price}</Text>
+          <View className="mb-4">
+            <Text className="text-base font-bold text-black">{item.title}</Text>
+            <Text className="text-gray-600 text-sm">{item.city}</Text>
+            <Text className="text-blue-600 text-[15px] font-medium">{item.price}</Text>
           </View>
         )}
       />
