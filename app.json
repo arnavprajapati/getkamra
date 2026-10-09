@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "FoundIt",
-    "slug": "FoundIt",
+    "name": "GetKamra",
+    "slug": "GetKamra",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "foundit",
+    "scheme": "getkamra",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
