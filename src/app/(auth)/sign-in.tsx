@@ -1,8 +1,9 @@
-import { useSignIn } from "@clerk/expo";
-import { Link, useRouter } from "expo-router";
+import { useSignIn, useAuth } from "@clerk/expo";
+import { Link, useRouter, Redirect } from "expo-router";
 import { useState } from "react";
 import {
     ActivityIndicator,
+    Alert,
     Image,
     ScrollView,
     Text,
@@ -19,13 +20,24 @@ export default function SignInScreen() {
     const [password, setPassword] = useState("");
     const [code, setCode] = useState("");
 
+    const { isLoaded, isSignedIn } = useAuth();
+
     const onSignInPress = async () => {
+
+        if (isSignedIn) {
+            router.replace("/(root)/(tabs)");
+            return;
+        }
+
         const { error } = await signIn.password({
             emailAddress: email,
             password,
         });
 
-        if (error) return;
+        if (error) {
+            Alert.alert("Unable to log in", error.message);
+            return;
+        }
 
         if (signIn.status === "complete") {
             await signIn.finalize({
@@ -63,6 +75,12 @@ export default function SignInScreen() {
     };
 
     const isLoading = fetchStatus === "fetching";
+
+    if (!isLoaded) return null;
+
+    if (isSignedIn) {
+        return <Redirect href="/(root)/(tabs)" />;
+    }
 
     if (signIn.status === "needs_client_trust") {
         return (
@@ -207,11 +225,19 @@ export default function SignInScreen() {
                     secureTextEntry
                 />
 
-                {errors.fields.password && (
-                    <Text className="text-red-500 mt-1">
-                        {errors.fields.password.message}
+                <TouchableOpacity
+                    onPress={() =>
+                        router.push({
+                            pathname: "/forgot-password",
+                            params: { email },
+                        })
+                    }
+                    className="self-end mt-3"
+                >
+                    <Text className="text-orange-600 font-semibold">
+                        Forgot password?
                     </Text>
-                )}
+                </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress={onSignInPress}
