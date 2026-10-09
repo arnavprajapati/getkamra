@@ -45,7 +45,13 @@ export default function SignUpScreen() {
 
         if (signUp.status === "complete") {
             await signUp.finalize({
-                navigate: ({ decorateUrl }) => {
+                navigate: ({ session, decorateUrl }) => {
+
+                    if(session?.currentTask){
+                        console.log(session?.currentTask);
+                        return
+                    }
+
                     const url = decorateUrl("/")
                     router.replace(url as any);
                 },
