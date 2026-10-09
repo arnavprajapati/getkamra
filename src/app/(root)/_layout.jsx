@@ -7,7 +7,7 @@ export default function RootLayout() {
     
 
     if (!isLoaded) return null
-    if (isSignedIn) return <Redirect href="/sign-in" />
+    if (!isSignedIn) return <Redirect href="/sign-in" />
 
     return (
         <Slot />

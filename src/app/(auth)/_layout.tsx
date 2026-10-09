@@ -8,6 +8,6 @@ export default function Index() {
     if (isSignedIn) return <Redirect href={"/"} />
 
     return (
-        <Stack />
+        <Stack screenOptions={{ headerShown: false }} />
     );
 }
